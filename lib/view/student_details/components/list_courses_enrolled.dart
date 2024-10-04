@@ -1,10 +1,10 @@
-import 'package:escola/model/enrolled_couse.dart';
+import 'package:escola/model/course_model.dart';
 import 'package:flutter/material.dart';
 
-class ListEnrolledCourse extends StatelessWidget {
-  final List<EnrolledCourse> courses;
-  final void Function(EnrolledCourse)? onTapItem;
-  const ListEnrolledCourse({
+class ListEnrollmentCourse extends StatelessWidget {
+  final List<CourseModel> courses;
+  final void Function(CourseModel)? onTapItem;
+  const ListEnrollmentCourse({
     super.key,
     required this.courses,
     this.onTapItem,
@@ -18,9 +18,6 @@ class ListEnrolledCourse extends StatelessWidget {
       itemCount: courses.length,
       itemBuilder: (context, index) {
         return ListTile(
-          // onTap: () {
-          //   onTapItem!(courses[index]);
-          // },
           leading: const CircleAvatar(
             child: Icon(Icons.library_books),
           ),
@@ -29,7 +26,7 @@ class ListEnrolledCourse extends StatelessWidget {
                 onTapItem!(courses[index]);
               },
               icon: const Icon(Icons.delete_outline_rounded)),
-          title: Text(courses[index].course.descricao),
+          title: Text(courses[index].description),
         );
       },
     );

@@ -6,7 +6,7 @@ import 'package:escola/model/student_model.dart';
 
 class ListStudents extends StatelessWidget {
   final List<StudentModel> students;
-  final void Function()? onTapItem;
+  final void Function(StudentModel)? onTapItem;
   const ListStudents({
     super.key,
     required this.students,
@@ -23,11 +23,13 @@ class ListStudents extends StatelessWidget {
         return ListTile(
           // onLongPress: () =>
           //     onLongPress(isSelected, index),
-          onTap: onTapItem,
+          onTap: () {
+            onTapItem!(students[index]);
+          },
           leading: const CircleAvatar(
             child: Icon(Icons.person_outline),
           ),
-          title: Text(students[index].nome),
+          title: Text(students[index].name),
         );
       },
     );

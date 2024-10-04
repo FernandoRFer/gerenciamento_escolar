@@ -2,10 +2,79 @@ import 'dart:async';
 import 'package:angles/angles.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lottie/lottie.dart';
+
+class AppSuccesss extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final List<Widget>? buttons;
+  final BuildContext context;
+  final bool isClosingWithTime;
+  final Function()? action;
+  const AppSuccesss(
+      {super.key,
+      this.title = "",
+      this.subtitle = "",
+      this.buttons,
+      required this.context,
+      this.isClosingWithTime = true,
+      this.action});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return TweenAnimationBuilder<Duration>(
+        duration: const Duration(seconds: 5),
+        tween: Tween(begin: const Duration(seconds: 3), end: Duration.zero),
+        onEnd: action,
+        builder: (BuildContext context, Duration value, Widget? child) {
+          return GestureDetector(
+            onTap: action,
+            child: Container(
+              color: Colors.transparent,
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: AnimatedCheck(),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(top: 14),
+                            child: Text(
+                              title,
+                              textAlign: TextAlign.center,
+                              style: theme.textTheme.headlineMedium,
+                            ),
+                          ),
+                          subtitle == ""
+                              ? Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                                  child: Text(
+                                    subtitle,
+                                  ),
+                                )
+                              : Container()
+                        ],
+                      ),
+                    ),
+                  ),
+                  // ...?buttons
+                ],
+              ),
+            ),
+          );
+        });
+  }
+}
 
 class Successs {
-  appShowDialog({
+  Future<void> appShowDialog({
     String title = "",
     String subtitle = "",
     List<Widget>? buttons,
@@ -21,7 +90,7 @@ class Successs {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return TweenAnimationBuilder<Duration>(
-              duration: const Duration(seconds: 3),
+              duration: const Duration(seconds: 5),
               tween:
                   Tween(begin: const Duration(seconds: 3), end: Duration.zero),
               onEnd: button,
@@ -75,7 +144,7 @@ class AnimatedCheck extends StatefulWidget {
   const AnimatedCheck({super.key});
 
   @override
-  _AnimatedCheckState createState() => _AnimatedCheckState();
+  State<AnimatedCheck> createState() => _AnimatedCheckState();
 }
 
 class _AnimatedCheckState extends State<AnimatedCheck>

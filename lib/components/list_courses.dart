@@ -29,7 +29,7 @@ class ListCourse extends StatelessWidget {
           //       onTapItem!(courses[index]);
           //     },
           //     icon: const Icon(Icons.delete_outline_rounded)),
-          title: Text(courses[index].descricao),
+          title: Text(courses[index].description),
         );
       },
     );

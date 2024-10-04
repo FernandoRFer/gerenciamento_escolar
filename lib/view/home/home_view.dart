@@ -1,4 +1,3 @@
-import 'package:escola/components/bottom_sheet.dart';
 import 'package:escola/components/error_view.dart';
 import 'package:escola/components/loading.dart';
 import 'package:escola/view/home/components/body_home.dart';
@@ -51,25 +50,18 @@ class _HomeViewState extends State<HomeView> {
                 }
               }
             } else {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                AppBottomSheet.bottomSheetCustom(
-                  context: context,
-                  isDismissible: true,
-                  enableDrag: true,
-                  child: ErrorView(
-                      title: "Error",
-                      subtitle: snapshot.error.toString(),
-                      buttons: [
-                        OutlinedButton(
-                          child: const Center(child: Text("Back")),
-                          onPressed: () {
-                            widget.bloc.load();
-                            widget.bloc.navigatorPop();
-                          },
-                        ),
-                      ]),
-                );
-              });
+              return ErrorView(
+                  title: "Error",
+                  subtitle: snapshot.error.toString(),
+                  buttons: [
+                    OutlinedButton(
+                      child: const Center(child: Text("Back")),
+                      onPressed: () {
+                        widget.bloc.load();
+                        widget.bloc.navigatorPop();
+                      },
+                    ),
+                  ]);
             }
 
             return BodyHome(

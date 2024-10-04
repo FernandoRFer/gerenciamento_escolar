@@ -1,10 +1,10 @@
-import 'package:escola/model/enrolled_student.dart';
+import 'package:escola/model/student_model.dart';
 import 'package:flutter/material.dart';
 
-class ListEnrolledStudent extends StatelessWidget {
-  final List<EnrolledStudent> students;
-  final void Function(EnrolledStudent)? onTapItem;
-  const ListEnrolledStudent({
+class ListEnrollmentStudent extends StatelessWidget {
+  final List<StudentModel> students;
+  final void Function(StudentModel)? onTapItem;
+  const ListEnrollmentStudent({
     super.key,
     required this.students,
     this.onTapItem,
@@ -29,7 +29,7 @@ class ListEnrolledStudent extends StatelessWidget {
                 onTapItem!(students[index]);
               },
               icon: const Icon(Icons.delete_outline_rounded)),
-          title: Text(students[index].student.nome),
+          title: Text(students[index].name),
         );
       },
     );

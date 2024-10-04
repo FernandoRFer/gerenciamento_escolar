@@ -1,7 +1,8 @@
 import 'package:escola/view/course/course_view.dart';
 import 'package:escola/view/course_details/course_details_view.dart';
+import 'package:escola/view/enrollment/enrollment_view.dart';
 import 'package:escola/view/home/home_view.dart';
-import 'package:escola/view/matricula/matricula_view.dart';
+
 import 'package:escola/view/splash/splash_bloc.dart';
 import 'package:escola/view/splash/splash_view.dart';
 import 'package:escola/view/student_details/student_details_view.dart';
@@ -14,7 +15,7 @@ class AppRoutes {
   static const String home = "/home";
   static const String register = "/register";
   static const String splash = "/splash";
-  static const String matriculaView = "/matricula";
+  static const String enrollment = "/matricula";
   static const String course = "/course";
   static const String courseDetails = "/courseDetails";
   static const String student = "/student";
@@ -26,7 +27,7 @@ class AppRoutes {
         splash: (_) => SplashView(getIt.get<ISplashBloc>()),
         home: (_) => getIt.get<HomeView>(),
         course: (_) => getIt.get<CourseView>(),
-        matriculaView: (_) => const MatriculaView(),
+        enrollment: (_) => getIt.get<EnrollmentView>(),
         student: (_) => getIt.get<StudentView>(),
         studentDetails: (_) => getIt.get<StudentDetailsView>(),
         courseDetails: (_) => getIt.get<CourseDetailsView>()

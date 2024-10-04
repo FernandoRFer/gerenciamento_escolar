@@ -1,22 +1,22 @@
 class StudentModel {
-  int codigo;
-  String nome;
+  int id;
+  String name;
   StudentModel({
-    required this.codigo,
-    required this.nome,
+    required this.id,
+    required this.name,
   });
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'codigo': codigo,
-      'nome': nome,
+      'id': id,
+      'name': name,
     };
   }
 
   factory StudentModel.fromJson(Map<String, dynamic> json) {
     return StudentModel(
-      codigo: json['codigo'] ?? 0,
-      nome: json['nome'] ?? "",
+      id: json['id'] ?? 0,
+      name: json['name'] ?? "",
     );
   }
 }

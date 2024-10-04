@@ -1,4 +1,4 @@
-import 'package:escola/core/router/navigator_app.dart';
+import 'package:escola/core/navigator/navigator_app.dart';
 import 'package:escola/repository/repository_module.dart';
 import 'package:escola/view/module_view.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:escola/core/router/routes.dart';
-import 'package:escola/core/router/navigator_app.dart';
+import 'package:escola/core/navigator/navigator_app.dart';
 import 'package:escola/repository/couse_repository/i_course_repository.dart';
 import 'package:escola/view/course_details/course_details_view.dart';
 import 'package:escola/model/course_model.dart';
@@ -83,7 +83,7 @@ class CourseBloc implements ICourseBloc {
   Future<void> delete(CourseModel course) async {
     try {
       _fetchingDataController.add(LoadingCourseStates());
-      await _courseRepository.delete(course);
+      await _courseRepository.delete(course.id);
       await load();
     } catch (e) {
       _fetchingDataController.addError(
@@ -117,7 +117,7 @@ class CourseBloc implements ICourseBloc {
   Future<void> search(String? search) async {
     if (search != null && search.isNotEmpty) {
       final result = _courses
-          .where((e) => e.descricao.toLowerCase().contains(search))
+          .where((e) => e.description.toLowerCase().contains(search))
           .toList();
       _fetchingDataController
           .add(CourseModelBloc(courses: result, search: search));

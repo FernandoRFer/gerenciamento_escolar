@@ -1,10 +1,11 @@
 import 'package:escola/model/course_model.dart';
 import 'package:escola/repository/couse_repository/i_course_repository.dart';
+import 'package:escola/utils/mocks/mock_data.dart';
 
 class MockCourse implements ICourseRepository {
   @override
-  Future<void> delete(CourseModel courseDelete) async {
-    listCourseModel.removeWhere((e) => e.codigo == courseDelete.codigo);
+  Future<void> delete(int idCourse) async {
+    listCourseModel.removeWhere((e) => e.id == idCourse);
   }
 
   @override
@@ -13,39 +14,28 @@ class MockCourse implements ICourseRepository {
   }
 
   @override
-  Future<void> register(CourseModel course) async {
+  Future<CourseModel> register(CourseModel course) async {
     listCourseModel.add(course);
+    return course;
   }
 
   @override
-  Future<void> update(CourseModel courseUpdate) async {
+  Future<CourseModel> update(CourseModel courseUpdate) async {
     for (var course in listCourseModel) {
-      if (course.codigo == courseUpdate.codigo) {
+      if (course.id == courseUpdate.id) {
         course = courseUpdate;
       }
     }
+    return courseUpdate;
+  }
+
+  @override
+  Future<CourseModel> getById(int idCourse) async {
+    for (var course in listCourseModel) {
+      if (course.id == idCourse) {
+        return course;
+      }
+    }
+    throw ("Curso não localizado");
   }
 }
-
-final List<CourseModel> listCourseModel = [
-  CourseModel(
-      codigo: 1,
-      descricao: "Introdução à Programação",
-      ementa:
-          "Este curso aborda os conceitos básicos de programação, incluindo estruturas de controle, variáveis e funções."),
-  CourseModel(
-      codigo: 2,
-      descricao: "ADM",
-      ementa:
-          "Este curso aborda os conceitos básicos de programação, incluindo estruturas de controle, variáveis e funções."),
-  CourseModel(
-      codigo: 3,
-      descricao: "direito",
-      ementa:
-          "Este curso aborda os conceitos básicos de programação, incluindo estruturas de controle, variáveis e funções."),
-  CourseModel(
-      codigo: 4,
-      descricao: "Fisoterapia",
-      ementa:
-          "Este curso aborda os conceitos básicos de programação, incluindo estruturas de controle, variáveis e funções."),
-];

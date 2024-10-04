@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:developer';
-import 'package:escola/core/router/navigator_app.dart';
+
+import 'package:escola/core/navigator/navigator_app.dart';
 import 'package:escola/core/router/routes.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -13,6 +13,7 @@ abstract class IHomeBloc {
   Future<void> dispose();
   Future<void> navigatorCourse();
   Future<void> navigatorStudents();
+  Future<void> navigatorEnrollment();
 }
 
 class HomeBloc implements IHomeBloc {
@@ -23,13 +24,10 @@ class HomeBloc implements IHomeBloc {
   );
 
   final _fetchingDataController = BehaviorSubject<HomeModelBloc>();
-  final _userNameController = BehaviorSubject<String>();
-  final userdddd = StreamController();
 
   @override
   Future<void> dispose() async {
     await _fetchingDataController.close();
-    await _userNameController.close();
   }
 
   @override
@@ -58,4 +56,9 @@ class HomeBloc implements IHomeBloc {
 
   @override
   Stream<HomeModelBloc> get onFetchingData => _fetchingDataController.stream;
+
+  @override
+  Future<void> navigatorEnrollment() async {
+    await _navigatorApp.pushNamed(AppRoutes.enrollment);
+  }
 }

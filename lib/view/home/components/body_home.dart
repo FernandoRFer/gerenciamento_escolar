@@ -20,18 +20,11 @@ class BodyHome extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      icon,
-                      size: 30,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
+                    Icon(icon, size: 30),
+                    const SizedBox(width: 8),
+                    Text(title,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
                   ],
                 ),
               ),
@@ -46,15 +39,12 @@ class BodyHome extends StatelessWidget {
         child: Column(children: [
           _appOutlinedButton(
               'Cursos', Icons.library_books, bloc.navigatorCourse),
-          const SizedBox(
-            height: 8,
-          ),
+          const SizedBox(height: 8),
           _appOutlinedButton('Alunos', Icons.supervised_user_circle_outlined,
               bloc.navigatorStudents),
-          const SizedBox(
-            height: 8,
-          ),
-          _appOutlinedButton('Matriculas', Icons.library_add_outlined, () {}),
+          const SizedBox(height: 8),
+          _appOutlinedButton('Matriculas', Icons.library_add_outlined,
+              bloc.navigatorEnrollment),
         ]),
       ),
     );

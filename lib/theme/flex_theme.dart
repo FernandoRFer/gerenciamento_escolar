@@ -2,6 +2,7 @@ import 'package:escola/theme/preferencies_user.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData flexThemeLight(IUserTheme controller) {
   return FlexThemeData.light(
@@ -86,7 +87,8 @@ const FlexSurfaceMode _surfaceMode = FlexSurfaceMode.highScaffoldLowSurface;
 
 const int _blendLevel = 0;
 
-const String _fontFamily = "Metrolopis";
+// const String _fontFamily = "Metrolopis";
+String? _fontFamily = GoogleFonts.notoSans().fontFamily;
 
 const bool _useSubThemes = true;
 const FlexSubThemesData _subThemesData = FlexSubThemesData(

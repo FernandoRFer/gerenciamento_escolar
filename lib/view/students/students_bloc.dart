@@ -5,7 +5,7 @@ import 'package:escola/core/router/routes.dart';
 import 'package:escola/view/student_details/student_details_view.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:escola/core/router/navigator_app.dart';
+import 'package:escola/core/navigator/navigator_app.dart';
 import 'package:escola/model/student_model.dart';
 import 'package:escola/repository/student_repository/i_student_repository.dart';
 
@@ -34,8 +34,6 @@ abstract class IStudentBloc {
   void navigatorPop();
   Future<void> studentDetails(StudentModel studentSelect);
   Future<void> dispose();
-  Future<void> update(StudentModel studentUpdate);
-  Future<void> delete(StudentModel studentDelete);
   Future<void> search(String? search);
   Future<void> claenSearch();
 }
@@ -76,32 +74,6 @@ class StudentBloc implements IStudentBloc {
   }
 
   @override
-  Future<void> delete(StudentModel student) async {
-    try {
-      _fetchingDataController.add(LoadingStudentStates());
-      await _studentRepository.delete(student);
-      await load();
-    } catch (e) {
-      _fetchingDataController.addError(
-        e,
-      );
-    }
-  }
-
-  @override
-  Future<void> update(StudentModel studentUpdate) async {
-    try {
-      _fetchingDataController.add(LoadingStudentStates());
-      await _studentRepository.update(studentUpdate);
-      await load();
-    } catch (e) {
-      _fetchingDataController.addError(
-        e,
-      );
-    }
-  }
-
-  @override
   Future<void> studentDetails(StudentModel studentSelect) async {
     await _navigatorApp
         .pushNamed(AppRoutes.studentDetails,
@@ -121,7 +93,7 @@ class StudentBloc implements IStudentBloc {
   Future<void> search(String? search) async {
     if (search != null) {
       final result = _students
-          .where((e) => e.nome.toLowerCase().contains(search))
+          .where((e) => e.name.toLowerCase().contains(search))
           .toList();
       _fetchingDataController
           .add(StudentModelBloc(students: result, search: search));

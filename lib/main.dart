@@ -1,4 +1,4 @@
-import 'package:escola/core/router/module_init.dart';
+import 'package:escola/core/module_init.dart';
 import 'package:escola/core/router/routes.dart';
 import 'package:escola/theme/app_color.dart';
 import 'package:escola/theme/flex_theme.dart';
