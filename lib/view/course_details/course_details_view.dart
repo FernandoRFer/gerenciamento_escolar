@@ -1,7 +1,8 @@
-import 'package:escola/components/error_view.dart';
-import 'package:escola/components/loading.dart';
-import 'package:escola/model/course_model.dart';
-import 'package:escola/view/course_details/components/course_detalis_widget.dart';
+import 'package:gerenciamento_escolar/components/error_view.dart';
+import 'package:gerenciamento_escolar/components/loading.dart';
+import 'package:gerenciamento_escolar/components/success.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
+import 'package:gerenciamento_escolar/view/course_details/components/course_detalis_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -88,209 +89,24 @@ class _CourseDetailsViewState extends State<CourseDetailsView> {
                   courseDetails: courseDetails,
                   bloc: widget.bloc,
                 );
-                // return Scaffold(
-                //   appBar: AppBar(
-                //     title: const Text("Curso"),
-                //     actions: [
-                //       Row(
-                //         children: [
-                //           IconButton(
-                //               onPressed: () {
-                //                 AppDialog.showMDialog(
-                //                     context: context,
-                //                     title: Row(
-                //                       children: [
-                //                         const Expanded(
-                //                           child: Text("Editar aluno",
-                //                               overflow: TextOverflow.clip),
-                //                         ),
-                //                         IconButton(
-                //                             onPressed: widget.bloc.navigatorPop,
-                //                             icon: const Icon(Icons.close))
-                //                       ],
-                //                     ),
-                //                     content: SingleChildScrollView(
-                //                       child: Column(
-                //                         mainAxisSize: MainAxisSize.min,
-                //                         children: [
-                //                           const SizedBox(
-                //                             height: 8,
-                //                           ),
-                //                           TextFormField(
-                //                             maxLines: 1,
-                //                             initialValue: courseDetails
-                //                                 .course.description,
-                //                             onChanged: (value) => courseDetails
-                //                                 .course.description = value,
-                //                             decoration: const InputDecoration(
-                //                               labelText: "Descrição",
-                //                             ),
-                //                           ),
-                //                           const SizedBox(height: 12),
-                //                           TextFormField(
-                //                             maxLines: 2,
-                //                             initialValue:
-                //                                 courseDetails.course.syllabus,
-                //                             onChanged: (value) => courseDetails
-                //                                 .course.syllabus = value,
-                //                             decoration: const InputDecoration(
-                //                               labelText: "Ementa",
-                //                             ),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                     ),
-                //                     actions: [
-                //                       FilledButton(
-                //                         onPressed: () {
-                //                           widget.bloc.navigatorPop();
-                //                           widget.bloc
-                //                               .update(courseDetails.course);
-                //                         },
-                //                         child: const Center(
-                //                             child: Text("Atualizar")),
-                //                       )
-                //                     ]);
-                //               },
-                //               icon: const Icon(Icons.edit_outlined)),
-                //           IconButton(
-                //               onPressed: () {
-                //                 if (courseDetails.studants.isNotEmpty) {
-                //                   AppDialog.showDialogInf(
-                //                       context: context,
-                //                       title: "Atenção",
-                //                       subtitle:
-                //                           "Não é possivel excluir alunos que estão macriculados em algum curso!",
-                //                       onPressed: widget.bloc.navigatorPop);
-                //                 } else {
-                //                   AppDialog.showMyDialogOptions(
-                //                       context: context,
-                //                       title:
-                //                           "O aluno \"${courseDetails.course.description}\" será excluido",
-                //                       subtitle: "Deseja continuar?",
-                //                       actionTrue: () {
-                //                         widget.bloc.deleteStuderd();
-                //                         widget.bloc.navigatorPop();
-                //                       },
-                //                       actionFalse: () {
-                //                         widget.bloc.navigatorPop();
-                //                       });
-                //                 }
-                //               },
-                //               icon: const Icon(Icons.delete)),
-                //         ],
-                //       ),
-                //     ],
-                //   ),
-                //   body: Center(
-                //     child: LayoutBuilder(builder: (context, boxConstraints) {
-                //       return SingleChildScrollView(
-                //         child: SizedBox(
-                //           height: boxConstraints.maxHeight,
-                //           child: Padding(
-                //             padding: const EdgeInsets.all(8.0),
-                //             child: Column(
-                //               mainAxisSize: MainAxisSize.min,
-                //               mainAxisAlignment: MainAxisAlignment.center,
-                //               children: [
-                //                 const SizedBox(height: 8),
-                //                 Align(
-                //                   alignment: Alignment.centerLeft,
-                //                   child: Text(
-                //                     courseDetails.course.description
-                //                         .toUpperCase(),
-                //                     style: TextStyle(
-                //                         fontWeight: FontWeight.bold,
-                //                         fontSize: theme
-                //                             .textTheme.titleLarge?.fontSize),
-                //                   ),
-                //                 ),
-                //                 const SizedBox(height: 8),
-                //                 Card(
-                //                   color: theme.colorScheme.secondaryContainer,
-                //                   margin: const EdgeInsets.all(0),
-                //                   child: Padding(
-                //                     padding: const EdgeInsets.all(8.0),
-                //                     child: Center(
-                //                       child: Text(
-                //                         courseDetails.course.syllabus,
-                //                         textAlign: TextAlign.justify,
-                //                         style: TextStyle(
-                //                             fontSize: theme.textTheme
-                //                                 .titleMedium?.fontSize),
-                //                       ),
-                //                     ),
-                //                   ),
-                //                 ),
-                //                 const SizedBox(
-                //                   height: 8,
-                //                 ),
-                //                 courseDetails.studants.isNotEmpty
-                //                     ? Column(
-                //                         children: [
-                //                           Align(
-                //                             alignment: Alignment.centerLeft,
-                //                             child: Text(
-                //                               "Alunos matriculados:",
-                //                               style: TextStyle(
-                //                                   fontSize: theme.textTheme
-                //                                       .titleMedium?.fontSize),
-                //                             ),
-                //                           ),
-                //                           Card(
-                //                               margin: const EdgeInsets.all(0),
-                //                               child: ListEnrollmentStudent(
-                //                                 students:
-                //                                     courseDetails.studants,
-                //                                 onTapItem: (itemSelect) {
-                //                                   AppDialog.showMyDialogOptions(
-                //                                       context: context,
-                //                                       title:
-                //                                           "A matricula do aluno \"${itemSelect.name}\" para esse curso será cancelada",
-                //                                       subtitle:
-                //                                           "Deseja continuar?",
-                //                                       actionTrue: () async {
-                //                                         widget.bloc
-                //                                             .navigatorPop();
-                //                                         await widget.bloc
-                //                                             .deleteEnrollment(
-                //                                                 itemSelect.id);
-                //                                       },
-                //                                       actionFalse: () {
-                //                                         widget.bloc
-                //                                             .navigatorPop();
-                //                                       });
-                //                                 },
-                //                               )),
-                //                         ],
-                //                       )
-                //                     : const Center(
-                //                         child: Padding(
-                //                           padding: EdgeInsets.all(16.0),
-                //                           child: Text(
-                //                             "Não há aluno matriculados.",
-                //                             textAlign: TextAlign.center,
-                //                           ),
-                //                         ),
-                //                       ),
-                //                 const Expanded(child: SizedBox()),
-                //                 FilledButton(
-                //                     child: Center(
-                //                       child: Text("Matricular em Novo Curso",
-                //                           style: TextStyle(
-                //                             fontSize: theme.textTheme
-                //                                 .titleMedium?.fontSize,
-                //                           )),
-                //                     ),
-                //                     onPressed: () {}),
-                //               ],
-                //             ),
-                //           ),
-                //         ),
-                //       );
-                //     }),
-                //   ),
-                // );
+              }
+
+              if (snapshot.data is DeletedCoursetStates) {
+                return Scaffold(
+                  body: AppSuccesss(
+                      context: context,
+                      title: "Curso excluido com sucesso!",
+                      action: widget.bloc.navigatorPop),
+                );
+              }
+              if (snapshot.data is UpdatesCoursetStates) {
+                return Scaffold(
+                  body: AppSuccesss(
+                      context: context,
+                      title: (snapshot.data as UpdatesCoursetStates)
+                          .updateInformation,
+                      action: widget.bloc.recharge),
+                );
               }
             }
           }

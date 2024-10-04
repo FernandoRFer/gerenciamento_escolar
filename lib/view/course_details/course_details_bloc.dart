@@ -1,13 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+
+import 'package:gerenciamento_escolar/core/router/routes.dart';
+import 'package:gerenciamento_escolar/view/course_forms/course_forms_view.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:escola/core/navigator/navigator_app.dart';
-import 'package:escola/model/course_model.dart';
-import 'package:escola/model/student_model.dart';
-import 'package:escola/repository/couse_repository/i_course_repository.dart';
-import 'package:escola/repository/enrollment_repository/i_enrollment_repository.dart';
+import 'package:gerenciamento_escolar/core/navigator/navigator_app.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/repository/couse_repository/i_course_repository.dart';
+import 'package:gerenciamento_escolar/repository/enrollment_repository/i_enrollment_repository.dart';
 
 abstract class CourseDetailsStates {}
+
+class DeletedCoursetStates extends CourseDetailsStates {}
+
+class UpdatesCoursetStates extends CourseDetailsStates {
+  String updateInformation;
+  UpdatesCoursetStates(
+    this.updateInformation,
+  );
+}
 
 class LoadingCourseDetailsStates extends CourseDetailsStates {
   String title;
@@ -18,31 +31,31 @@ class LoadingCourseDetailsStates extends CourseDetailsStates {
 
 class CourseDetailsModelBloc extends CourseDetailsStates {
   CourseModel course;
-  List<StudentModel> studants;
+  List<StudentModel> students;
   CourseDetailsModelBloc({
     required this.course,
-    required this.studants,
+    required this.students,
   });
 
   CourseDetailsModelBloc copyWith({
     CourseModel? course,
-    List<StudentModel>? studants,
+    List<StudentModel>? students,
   }) {
     return CourseDetailsModelBloc(
       course: course ?? this.course,
-      studants: studants ?? this.studants,
+      students: students ?? this.students,
     );
   }
 }
 
 abstract class ICourseDetailsBloc {
   Stream<CourseDetailsStates> get onFetchingData;
-
-  Future<void> retrievingArgument(CourseModel? course);
   void navigatorPop();
   Future<void> dispose();
-  Future<void> update(CourseModel course);
-  Future<void> deleteEnrollment(int idEnrollment);
+  Future<void> retrievingArgument(CourseModel? course);
+  Future<void> recharge();
+  Future<void> update();
+  Future<void> deleteEnrollment(StudentModel idEnrollment);
   Future<void> deleteStuderd();
 }
 
@@ -58,7 +71,7 @@ class CourseDetailsBloc implements ICourseDetailsBloc {
 
   CourseDetailsModelBloc _courseDetails = CourseDetailsModelBloc(
     course: CourseModel(id: 0, description: '', syllabus: ''),
-    studants: <StudentModel>[],
+    students: <StudentModel>[],
   );
 
   final _fetchingDataController = BehaviorSubject<CourseDetailsStates>();
@@ -83,10 +96,10 @@ class CourseDetailsBloc implements ICourseDetailsBloc {
         return;
       }
 
-      final studants = await _enrollmentRepository.getDetailsCourse(course.id);
+      final students = await _enrollmentRepository.getDetailsCourse(course.id);
 
       _courseDetails =
-          CourseDetailsModelBloc(course: course, studants: studants);
+          CourseDetailsModelBloc(course: course, students: students);
 
       _fetchingDataController.add(_courseDetails);
     } catch (e) {
@@ -97,13 +110,14 @@ class CourseDetailsBloc implements ICourseDetailsBloc {
   }
 
   @override
-  Future<void> update(CourseModel course) async {
+  Future<void> recharge() async {
     try {
       _fetchingDataController.add(LoadingCourseDetailsStates());
-      await _courseRepository.update(course);
-
-      _courseDetails.copyWith(course: course);
-
+      final courses = await _courseRepository.getById(_courseDetails.course.id);
+      final students = await _enrollmentRepository
+          .getDetailsCourse(_courseDetails.course.id);
+      _courseDetails =
+          CourseDetailsModelBloc(students: students, course: courses);
       _fetchingDataController.add(_courseDetails);
     } catch (e) {
       _fetchingDataController.addError(
@@ -113,16 +127,32 @@ class CourseDetailsBloc implements ICourseDetailsBloc {
   }
 
   @override
-  Future<void> deleteEnrollment(int idStudent) async {
+  Future<void> update() async {
+    try {
+      _fetchingDataController.add(LoadingCourseDetailsStates());
+      await _navigatorApp.pushNamed(AppRoutes.courseForms,
+          arguments: CourseFormsViewArguments(course: _courseDetails.course));
+
+      recharge();
+    } catch (e) {
+      _fetchingDataController.addError(
+        e,
+      );
+    }
+  }
+
+  @override
+  Future<void> deleteEnrollment(StudentModel student) async {
     try {
       _fetchingDataController.add(LoadingCourseDetailsStates());
       await _enrollmentRepository.deleteEnrollment(
-          idStudent, _courseDetails.course.id);
+          student.id, _courseDetails.course.id);
 
-      _courseDetails.studants = await _enrollmentRepository
+      _courseDetails.students = await _enrollmentRepository
           .getDetailsCourse(_courseDetails.course.id);
 
-      _fetchingDataController.add(_courseDetails);
+      _fetchingDataController.add(UpdatesCoursetStates(
+          "Matricula do aluno \"${student.name}\" foi cancelada!"));
     } catch (e) {
       _fetchingDataController.addError(
         e,
@@ -136,7 +166,7 @@ class CourseDetailsBloc implements ICourseDetailsBloc {
       _fetchingDataController.add(LoadingCourseDetailsStates());
       await _courseRepository.delete(_courseDetails.course.id);
 
-      _fetchingDataController.add(LoadingCourseDetailsStates());
+      _fetchingDataController.add(DeletedCoursetStates());
     } catch (e) {
       _fetchingDataController.addError(
         e,

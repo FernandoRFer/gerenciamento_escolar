@@ -1,15 +1,20 @@
-import 'package:escola/core/module_init.dart';
-import 'package:escola/core/router/routes.dart';
-import 'package:escola/theme/app_color.dart';
-import 'package:escola/theme/flex_theme.dart';
-import 'package:escola/theme/preferencies_user.dart';
-import 'package:escola/theme/theme_widget.dart';
+import 'package:gerenciamento_escolar/core/module_init.dart';
+import 'package:gerenciamento_escolar/core/router/routes.dart';
+import 'package:gerenciamento_escolar/core/utils/request_settings.dart';
+import 'package:gerenciamento_escolar/theme/app_color.dart';
+import 'package:gerenciamento_escolar/theme/flex_theme.dart';
+import 'package:gerenciamento_escolar/theme/preferencies_user.dart';
+import 'package:gerenciamento_escolar/theme/theme_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   WidgetsFlutterBinding.ensureInitialized();
+  RequestSettings.getEnvironmentvariable();
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   AppModule(navigatorKey).configure();
 

@@ -9,12 +9,13 @@ class CCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
-      color: color,
-      margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+      color: isDark ? null : colorScheme.secondaryContainer,
+      // margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
       elevation: isDark ? 1 : 0.5,
       child: Padding(
-        padding: padding ?? const EdgeInsets.all(12),
+        padding: padding ?? const EdgeInsets.all(8),
         child: child,
       ),
     );

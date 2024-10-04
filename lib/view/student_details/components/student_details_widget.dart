@@ -1,8 +1,8 @@
-import 'package:escola/view/student_details/components/list_courses_enrolled.dart';
-import 'package:escola/view/student_details/student_details_bloc.dart';
+import 'package:gerenciamento_escolar/view/student_details/components/list_courses_enrolled.dart';
+import 'package:gerenciamento_escolar/view/student_details/student_details_bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'package:escola/components/app_dialog.dart';
+import 'package:gerenciamento_escolar/components/app_dialog.dart';
 
 class StudentDetailsWidget extends StatelessWidget {
   final StudentDetailsModelBloc studentDetails;
@@ -24,44 +24,7 @@ class StudentDetailsWidget extends StatelessWidget {
             children: [
               IconButton(
                   onPressed: () {
-                    AppDialog.showMDialog(
-                        context: context,
-                        title: Row(
-                          children: [
-                            const Expanded(
-                                child: Text("Editar aluno",
-                                    overflow: TextOverflow.clip)),
-                            IconButton(
-                                onPressed: bloc.navigatorPop,
-                                icon: const Icon(Icons.close))
-                          ],
-                        ),
-                        content: SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const SizedBox(height: 8),
-                              TextFormField(
-                                maxLines: 2,
-                                initialValue: studentDetails.student.name,
-                                onChanged: (value) =>
-                                    studentDetails.student.name = value,
-                                decoration: const InputDecoration(
-                                  labelText: "Nome",
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        actions: [
-                          FilledButton(
-                            onPressed: () {
-                              bloc.navigatorPop();
-                              bloc.update(studentDetails.student);
-                            },
-                            child: const Center(child: Text("Atualizar")),
-                          )
-                        ]);
+                    bloc.update();
                   },
                   icon: const Icon(Icons.edit_outlined)),
               IconButton(
@@ -93,13 +56,6 @@ class StudentDetailsWidget extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-          label: Text("Matricular em Novo Curso",
-              style: TextStyle(
-                fontSize: theme.textTheme.titleMedium?.fontSize,
-              )),
-          onPressed: () {}),
       body: SingleChildScrollView(
           child: SizedBox(
         child: Padding(

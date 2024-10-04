@@ -1,5 +1,5 @@
-import 'package:escola/view/student_details/student_details_bloc.dart';
-import 'package:escola/view/student_details/student_details_view.dart';
+import 'package:gerenciamento_escolar/view/student_details/student_details_bloc.dart';
+import 'package:gerenciamento_escolar/view/student_details/student_details_view.dart';
 import 'package:get_it/get_it.dart';
 
 class StudentDetailsModule {

@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:escola/repository/rest_client/irest_client.dart';
-import 'package:escola/repository/rest_client/irest_response.dart';
-import 'package:escola/repository/rest_client/rest_response.dart';
+import 'package:gerenciamento_escolar/repository/rest_client/irest_client.dart';
+import 'package:gerenciamento_escolar/repository/rest_client/irest_response.dart';
+import 'package:gerenciamento_escolar/repository/rest_client/rest_response.dart';
 import 'package:http/http.dart' as http;
 
 class RestClient implements IRestClient {

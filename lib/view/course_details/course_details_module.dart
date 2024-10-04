@@ -1,5 +1,5 @@
-import 'package:escola/view/course_details/course_details_bloc.dart';
-import 'package:escola/view/course_details/course_details_view.dart';
+import 'package:gerenciamento_escolar/view/course_details/course_details_bloc.dart';
+import 'package:gerenciamento_escolar/view/course_details/course_details_view.dart';
 import 'package:get_it/get_it.dart';
 
 class CourseDetailsModule {

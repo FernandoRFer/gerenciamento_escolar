@@ -1,10 +1,10 @@
-import 'package:escola/model/course_model.dart';
-import 'package:escola/model/enrollment_model.dart';
-import 'package:escola/model/student_model.dart';
-import 'package:escola/repository/couse_repository/course_repository.dart';
-import 'package:escola/repository/enrollment_repository/enrollment_repository.dart';
-import 'package:escola/repository/rest_client/rest_client.dart';
-import 'package:escola/repository/student_repository/student_repository.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
+import 'package:gerenciamento_escolar/model/enrollment_model.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/repository/couse_repository/course_repository.dart';
+import 'package:gerenciamento_escolar/repository/enrollment_repository/enrollment_repository.dart';
+import 'package:gerenciamento_escolar/repository/rest_client/rest_client.dart';
+import 'package:gerenciamento_escolar/repository/student_repository/student_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {

@@ -1,8 +1,8 @@
-import 'package:escola/components/error_view.dart';
-import 'package:escola/components/success.dart';
-import 'package:escola/components/loading.dart';
-import 'package:escola/model/student_model.dart';
-import 'package:escola/view/student_details/components/student_details_widget.dart';
+import 'package:gerenciamento_escolar/components/error_view.dart';
+import 'package:gerenciamento_escolar/components/success.dart';
+import 'package:gerenciamento_escolar/components/loading.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/view/student_details/components/student_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 

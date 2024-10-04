@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
-import 'package:escola/core/router/routes.dart';
-import 'package:escola/view/student_details/student_details_view.dart';
+import 'package:gerenciamento_escolar/core/router/routes.dart';
+import 'package:gerenciamento_escolar/view/student_details/student_details_view.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:escola/core/navigator/navigator_app.dart';
-import 'package:escola/model/student_model.dart';
-import 'package:escola/repository/student_repository/i_student_repository.dart';
+import 'package:gerenciamento_escolar/core/navigator/navigator_app.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/repository/student_repository/i_student_repository.dart';
 
 abstract class StudentStates {}
 
@@ -36,6 +36,8 @@ abstract class IStudentBloc {
   Future<void> dispose();
   Future<void> search(String? search);
   Future<void> claenSearch();
+
+  Future<void> navegateStudentCreate();
 }
 
 class StudentBloc implements IStudentBloc {
@@ -107,5 +109,11 @@ class StudentBloc implements IStudentBloc {
     _fetchingDataController.add(StudentModelBloc(
       students: _students,
     ));
+  }
+
+  @override
+  Future<void> navegateStudentCreate() async {
+    await _navigatorApp.pushNamed(AppRoutes.studentForms);
+    load();
   }
 }

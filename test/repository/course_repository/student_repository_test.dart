@@ -1,6 +1,6 @@
-import 'package:escola/model/student_model.dart';
-import 'package:escola/repository/rest_client/rest_client.dart';
-import 'package:escola/repository/student_repository/student_repository.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/repository/rest_client/rest_client.dart';
+import 'package:gerenciamento_escolar/repository/student_repository/student_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:escola/core/router/routes.dart';
-import 'package:escola/core/navigator/navigator_app.dart';
-import 'package:escola/repository/couse_repository/i_course_repository.dart';
-import 'package:escola/view/course_details/course_details_view.dart';
-import 'package:escola/model/course_model.dart';
+import 'package:gerenciamento_escolar/core/router/routes.dart';
+import 'package:gerenciamento_escolar/core/navigator/navigator_app.dart';
+import 'package:gerenciamento_escolar/repository/couse_repository/i_course_repository.dart';
+import 'package:gerenciamento_escolar/view/course_details/course_details_view.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
 
 abstract class CourseStates {}
 
@@ -35,6 +35,7 @@ abstract class ICourseBloc {
   Future<void> studentDetails(CourseModel course);
   Future<void> search(String? search);
   Future<void> claenSearch();
+  Future<void> navegateCourseCreate();
 }
 
 class CourseBloc implements ICourseBloc {
@@ -131,5 +132,10 @@ class CourseBloc implements ICourseBloc {
     _fetchingDataController.add(CourseModelBloc(
       courses: _courses,
     ));
+  }
+
+  @override
+  Future<void> navegateCourseCreate() async {
+    await _navigatorApp.pushNamed(AppRoutes.courseForms).then((_) => load());
   }
 }

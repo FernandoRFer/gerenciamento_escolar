@@ -1,6 +1,6 @@
-import 'package:escola/components/error_view.dart';
-import 'package:escola/components/loading.dart';
-import 'package:escola/view/home/components/body_home.dart';
+import 'package:gerenciamento_escolar/components/error_view.dart';
+import 'package:gerenciamento_escolar/components/loading.dart';
+import 'package:gerenciamento_escolar/view/home/components/body_home.dart';
 import 'package:flutter/material.dart';
 import 'home_bloc.dart';
 

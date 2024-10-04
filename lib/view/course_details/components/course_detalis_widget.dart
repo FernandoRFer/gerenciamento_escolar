@@ -1,6 +1,7 @@
-import 'package:escola/components/app_dialog.dart';
-import 'package:escola/components/list_enrolled_stadents.dart';
-import 'package:escola/view/course_details/course_details_bloc.dart';
+import 'package:gerenciamento_escolar/components/app_card.dart';
+import 'package:gerenciamento_escolar/components/app_dialog.dart';
+import 'package:gerenciamento_escolar/components/list_enrolled_stadents.dart';
+import 'package:gerenciamento_escolar/view/course_details/course_details_bloc.dart';
 import 'package:flutter/material.dart';
 
 class CourseDetalisWidget extends StatefulWidget {
@@ -26,64 +27,12 @@ class _CourseDetalisWidgetState extends State<CourseDetalisWidget> {
           children: [
             IconButton(
                 onPressed: () {
-                  AppDialog.showMDialog(
-                      context: context,
-                      title: Row(
-                        children: [
-                          const Expanded(
-                            child: Text("Editar aluno",
-                                overflow: TextOverflow.clip),
-                          ),
-                          IconButton(
-                              onPressed: widget.bloc.navigatorPop,
-                              icon: const Icon(Icons.close))
-                        ],
-                      ),
-                      content: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            TextFormField(
-                              maxLines: 1,
-                              initialValue:
-                                  widget.courseDetails.course.description,
-                              onChanged: (value) => widget
-                                  .courseDetails.course.description = value,
-                              decoration: const InputDecoration(
-                                labelText: "Descrição",
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            TextFormField(
-                              maxLines: 2,
-                              initialValue:
-                                  widget.courseDetails.course.syllabus,
-                              onChanged: (value) =>
-                                  widget.courseDetails.course.syllabus = value,
-                              decoration: const InputDecoration(
-                                labelText: "Ementa",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      actions: [
-                        FilledButton(
-                          onPressed: () {
-                            widget.bloc.navigatorPop();
-                            widget.bloc.update(widget.courseDetails.course);
-                          },
-                          child: const Center(child: Text("Atualizar")),
-                        )
-                      ]);
+                  widget.bloc.update();
                 },
                 icon: const Icon(Icons.edit_outlined)),
             IconButton(
                 onPressed: () {
-                  if (widget.courseDetails.studants.isNotEmpty) {
+                  if (widget.courseDetails.students.isNotEmpty) {
                     AppDialog.showDialogInf(
                         context: context,
                         title: "Atenção",
@@ -125,7 +74,7 @@ class _CourseDetalisWidgetState extends State<CourseDetalisWidget> {
         Card(
             margin: const EdgeInsets.all(0),
             child: ListEnrollmentStudent(
-              students: widget.courseDetails.studants,
+              students: widget.courseDetails.students,
               onTapItem: (itemSelect) {
                 AppDialog.showMyDialogOptions(
                     context: context,
@@ -134,7 +83,7 @@ class _CourseDetalisWidgetState extends State<CourseDetalisWidget> {
                     subtitle: "Deseja continuar?",
                     actionTrue: () async {
                       widget.bloc.navigatorPop();
-                      await widget.bloc.deleteEnrollment(itemSelect.id);
+                      await widget.bloc.deleteEnrollment(itemSelect);
                     },
                     actionFalse: () {
                       widget.bloc.navigatorPop();
@@ -148,28 +97,27 @@ class _CourseDetalisWidgetState extends State<CourseDetalisWidget> {
   Widget _headerCourse(ThemeData theme) {
     return Column(
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            widget.courseDetails.course.description.toUpperCase(),
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: theme.textTheme.titleLarge?.fontSize),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              widget.courseDetails.course.description.toUpperCase(),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: theme.textTheme.titleLarge?.fontSize),
+            ),
           ),
         ),
         const SizedBox(height: 8),
-        Card(
+        CCard(
           color: theme.colorScheme.secondaryContainer,
-          margin: const EdgeInsets.all(0),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Text(
-                widget.courseDetails.course.syllabus,
-                textAlign: TextAlign.justify,
-                style:
-                    TextStyle(fontSize: theme.textTheme.titleMedium?.fontSize),
-              ),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              widget.courseDetails.course.syllabus,
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: theme.textTheme.titleMedium?.fontSize),
             ),
           ),
         ),
@@ -182,34 +130,31 @@ class _CourseDetalisWidgetState extends State<CourseDetalisWidget> {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: _appBar(),
-      body: LayoutBuilder(builder: (context, boxConstraints) {
-        return SingleChildScrollView(
-          child: SizedBox(
-            height: boxConstraints.maxHeight,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 8),
-                  _headerCourse(theme),
-                  const SizedBox(height: 8),
-                  widget.courseDetails.studants.isNotEmpty
-                      ? _listStudents(theme)
-                      : const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Text(
-                              "Não há aluno matriculados.",
-                              textAlign: TextAlign.center,
-                            ),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 8),
+                _headerCourse(theme),
+                const SizedBox(height: 8),
+                widget.courseDetails.students.isNotEmpty
+                    ? _listStudents(theme)
+                    : const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            "Não há aluno matriculados.",
+                            textAlign: TextAlign.center,
                           ),
                         ),
-                ],
-              ),
+                      ),
+              ],
             ),
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 }

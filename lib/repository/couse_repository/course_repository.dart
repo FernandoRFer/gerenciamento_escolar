@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:escola/model/course_model.dart';
-import 'package:escola/repository/couse_repository/i_course_repository.dart';
-import 'package:escola/repository/rest_client/irest_client.dart';
-import 'package:escola/utils/request_settings.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
+import 'package:gerenciamento_escolar/repository/couse_repository/i_course_repository.dart';
+import 'package:gerenciamento_escolar/repository/rest_client/irest_client.dart';
+import 'package:gerenciamento_escolar/core/utils/request_settings.dart';
 
 class CourseRepository implements ICourseRepository {
   final IRestClient _restClient;
@@ -69,7 +69,7 @@ class CourseRepository implements ICourseRepository {
         body: course.toJson());
 
     response.ensureSuccess(
-        restClientExceptionMessage: "Erro ao atulizar curso");
+        restClientExceptionMessage: "Erro ao atualizar curso");
 
     return CourseModel.fromJson(jsonDecode(response.content));
   }

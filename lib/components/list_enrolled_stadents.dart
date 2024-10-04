@@ -1,4 +1,4 @@
-import 'package:escola/model/student_model.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
 import 'package:flutter/material.dart';
 
 class ListEnrollmentStudent extends StatelessWidget {

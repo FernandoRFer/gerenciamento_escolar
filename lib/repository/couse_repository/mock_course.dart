@@ -1,6 +1,6 @@
-import 'package:escola/model/course_model.dart';
-import 'package:escola/repository/couse_repository/i_course_repository.dart';
-import 'package:escola/utils/mocks/mock_data.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
+import 'package:gerenciamento_escolar/repository/couse_repository/i_course_repository.dart';
+import 'package:gerenciamento_escolar/core/utils/mocks/mock_data.dart';
 
 class MockCourse implements ICourseRepository {
   @override
@@ -21,12 +21,14 @@ class MockCourse implements ICourseRepository {
 
   @override
   Future<CourseModel> update(CourseModel courseUpdate) async {
-    for (var course in listCourseModel) {
-      if (course.id == courseUpdate.id) {
-        course = courseUpdate;
+    for (int i = 0; i < listCourseModel.length; i++) {
+      if (listCourseModel[i].id == courseUpdate.id) {
+        listCourseModel[i] = courseUpdate;
+        return listCourseModel[i];
       }
     }
-    return courseUpdate;
+
+    throw ("Curso não localizado");
   }
 
   @override

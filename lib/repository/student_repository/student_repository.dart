@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:escola/model/student_model.dart';
-import 'package:escola/repository/rest_client/irest_client.dart';
-import 'package:escola/repository/student_repository/i_student_repository.dart';
-import 'package:escola/utils/request_settings.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/repository/rest_client/irest_client.dart';
+import 'package:gerenciamento_escolar/repository/student_repository/i_student_repository.dart';
+import 'package:gerenciamento_escolar/core/utils/request_settings.dart';
 
 class StudentRepository implements IStudentRepository {
   final String domain;

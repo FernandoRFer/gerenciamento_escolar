@@ -1,6 +1,6 @@
-import 'package:escola/model/student_model.dart';
-import 'package:escola/repository/student_repository/i_student_repository.dart';
-import 'package:escola/utils/mocks/mock_data.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/repository/student_repository/i_student_repository.dart';
+import 'package:gerenciamento_escolar/core/utils/mocks/mock_data.dart';
 
 class MockStudent implements IStudentRepository {
   @override
@@ -27,7 +27,7 @@ class MockStudent implements IStudentRepository {
         return listStudents[i];
       }
     }
-    throw ("Não foi possivel atulizar o cadastro do Aluno.");
+    throw ("Não foi possivel atualizar o cadastro do Aluno.");
   }
 
   @override
@@ -37,6 +37,6 @@ class MockStudent implements IStudentRepository {
         return listStudent;
       }
     }
-    throw ("Não foi possivel atulizar o cadastro do Aluno.");
+    throw ("Não foi possivel atualizar o cadastro do Aluno.");
   }
 }

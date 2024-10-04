@@ -9,6 +9,9 @@ class EnrollmentModule {
     getIt
       ..registerFactory<IEnrollmentBloc>(() => EnrollmentBloc(
             getIt(),
+            getIt(),
+            getIt(),
+            getIt(),
           ))
       ..registerFactory(() => EnrollmentView(
             getIt(),

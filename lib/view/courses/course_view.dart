@@ -1,8 +1,7 @@
-import 'package:escola/components/app_search.dart';
-import 'package:escola/components/bottom_sheet.dart';
-import 'package:escola/components/error_view.dart';
-import 'package:escola/components/list_courses.dart';
-import 'package:escola/components/loading.dart';
+import 'package:gerenciamento_escolar/components/app_search.dart';
+import 'package:gerenciamento_escolar/components/error_view.dart';
+import 'package:gerenciamento_escolar/components/list_courses.dart';
+import 'package:gerenciamento_escolar/components/loading.dart';
 import 'package:flutter/material.dart';
 import 'course_bloc.dart';
 
@@ -59,7 +58,10 @@ class _CourseViewState extends State<CourseView> {
                   title: const Text("Cursos"),
                 ),
                 floatingActionButton: FloatingActionButton.extended(
-                    label: const Text("Adicionar Curso"), onPressed: () {}),
+                    label: const Text("Adicionar Curso"),
+                    onPressed: () {
+                      widget.bloc.navegateCourseCreate();
+                    }),
                 body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -81,29 +83,26 @@ class _CourseViewState extends State<CourseView> {
               );
             }
           } else {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              AppBottomSheet.bottomSheetCustom(
-                context: context,
-                isDismissible: true,
-                enableDrag: true,
-                child: ErrorView(
-                    title: "Error",
-                    subtitle: snapshot.error.toString(),
-                    buttons: [
-                      OutlinedButton(
-                        child: const Center(child: Text("Back")),
-                        onPressed: () {
-                          widget.bloc.load();
-                          widget.bloc.navigatorPop();
-                        },
-                      ),
-                    ]),
-              );
-            });
+            return Scaffold(
+              body: ErrorView(
+                  title: "Error",
+                  subtitle: snapshot.error.toString(),
+                  buttons: [
+                    OutlinedButton(
+                      child: const Center(child: Text("Back")),
+                      onPressed: () {
+                        widget.bloc.load();
+                        widget.bloc.navigatorPop();
+                      },
+                    ),
+                  ]),
+            );
           }
 
-          return const Center(
-            child: Text("Sem cursos para exibir"),
+          return const Scaffold(
+            body: Center(
+              child: Text("Sem cursos para exibir"),
+            ),
           );
         });
   }

@@ -1,4 +1,4 @@
-import 'package:escola/view/home/home_bloc.dart';
+import 'package:gerenciamento_escolar/view/home/home_bloc.dart';
 import 'package:flutter/material.dart';
 
 class BodyHome extends StatelessWidget {

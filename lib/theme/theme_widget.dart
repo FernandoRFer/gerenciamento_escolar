@@ -1,4 +1,4 @@
-import 'package:escola/theme/preferencies_user.dart';
+import 'package:gerenciamento_escolar/theme/preferencies_user.dart';
 import 'package:flutter/widgets.dart';
 
 class ThemeWidget extends InheritedNotifier<IUserTheme>

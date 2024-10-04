@@ -1,8 +1,8 @@
-import 'package:escola/model/course_model.dart';
-import 'package:escola/model/enrollment_model.dart';
-import 'package:escola/model/student_model.dart';
-import 'package:escola/repository/enrollment_repository/i_enrollment_repository.dart';
-import 'package:escola/utils/mocks/mock_data.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
+import 'package:gerenciamento_escolar/model/enrollment_model.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/repository/enrollment_repository/i_enrollment_repository.dart';
+import 'package:gerenciamento_escolar/core/utils/mocks/mock_data.dart';
 
 class MockEnrollment implements IEnrollmentRepository {
   @override

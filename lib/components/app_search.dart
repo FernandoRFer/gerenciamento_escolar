@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:escola/components/icon_animated.dart';
+import 'package:gerenciamento_escolar/components/icon_animated.dart';
 
 class AppSearch extends StatefulWidget {
   final Widget itens;

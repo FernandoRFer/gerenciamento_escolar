@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:escola/repository/rest_client/model/rest_error.dart';
+import 'package:gerenciamento_escolar/repository/rest_client/model/rest_error.dart';
 import 'irest_response.dart';
 
 class RestClientException implements Exception {

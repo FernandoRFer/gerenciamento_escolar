@@ -1,4 +1,4 @@
-import 'package:escola/view/splash/splash_bloc.dart';
+import 'package:gerenciamento_escolar/view/splash/splash_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 

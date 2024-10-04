@@ -1,12 +1,14 @@
 import 'dart:async';
 
+import 'package:gerenciamento_escolar/core/router/routes.dart';
+import 'package:gerenciamento_escolar/view/student_forms/student_forms_view.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:escola/core/navigator/navigator_app.dart';
-import 'package:escola/model/course_model.dart';
-import 'package:escola/model/student_model.dart';
-import 'package:escola/repository/enrollment_repository/i_enrollment_repository.dart';
-import 'package:escola/repository/student_repository/i_student_repository.dart';
+import 'package:gerenciamento_escolar/core/navigator/navigator_app.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/repository/enrollment_repository/i_enrollment_repository.dart';
+import 'package:gerenciamento_escolar/repository/student_repository/i_student_repository.dart';
 
 abstract class StudentDetailsStates {}
 
@@ -50,7 +52,7 @@ abstract class IStudentDetailsBloc {
   Future<void> retrievingArgument(StudentModel? student);
   void navigatorPop();
   Future<void> dispose();
-  Future<void> update(StudentModel student);
+  Future<void> update();
   Future<void> deleteEnrollment(CourseModel idCourse);
   Future<void> deleteStuderd();
   Future<void> recharge();
@@ -140,14 +142,13 @@ class StudentDetailsBloc implements IStudentDetailsBloc {
   }
 
   @override
-  Future<void> update(StudentModel student) async {
+  Future<void> update() async {
     try {
       _fetchingDataController.add(LoadingStudentDetailsStates());
-      _studentRepository.update(student);
-      final courses = await _enrollmentRepository.getDetailsStudent(student.id);
-      _studentDetails.copyWith(student: student, courses: courses);
-      _fetchingDataController
-          .add(UpdateSuccesStudentStates("Aluno excluido com sucesso!"));
+      await _navigatorApp.pushNamed(AppRoutes.studentForms,
+          arguments:
+              StudentFormsViewArguments(studend: _studentDetails.student));
+      recharge();
     } catch (e) {
       _fetchingDataController.addError(
         e,

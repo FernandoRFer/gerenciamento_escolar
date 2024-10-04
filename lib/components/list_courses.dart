@@ -1,4 +1,4 @@
-import 'package:escola/model/course_model.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
 import 'package:flutter/material.dart';
 
 class ListCourse extends StatelessWidget {
@@ -24,11 +24,6 @@ class ListCourse extends StatelessWidget {
           leading: const CircleAvatar(
             child: Icon(Icons.library_books),
           ),
-          // trailing: IconButton(
-          //     onPressed: () {
-          //       onTapItem!(courses[index]);
-          //     },
-          //     icon: const Icon(Icons.delete_outline_rounded)),
           title: Text(courses[index].description),
         );
       },

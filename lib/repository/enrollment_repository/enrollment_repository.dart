@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:escola/model/course_model.dart';
-import 'package:escola/model/enrollment_model.dart';
-import 'package:escola/model/student_model.dart';
-import 'package:escola/repository/enrollment_repository/i_enrollment_repository.dart';
-import 'package:escola/repository/rest_client/irest_client.dart';
-import 'package:escola/utils/request_settings.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
+import 'package:gerenciamento_escolar/model/enrollment_model.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
+import 'package:gerenciamento_escolar/repository/enrollment_repository/i_enrollment_repository.dart';
+import 'package:gerenciamento_escolar/repository/rest_client/irest_client.dart';
+import 'package:gerenciamento_escolar/core/utils/request_settings.dart';
 
 class EnrollmentRepository implements IEnrollmentRepository {
   final IRestClient _restClient;

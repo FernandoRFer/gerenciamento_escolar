@@ -1,5 +1,5 @@
-import 'package:escola/model/course_model.dart';
-import 'package:escola/model/student_model.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
+import 'package:gerenciamento_escolar/model/student_model.dart';
 
 class EnrollmentModel {
   int id;

@@ -1,4 +1,4 @@
-import 'package:escola/theme/preferencies_user.dart';
+import 'package:gerenciamento_escolar/theme/preferencies_user.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

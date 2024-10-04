@@ -1,5 +1,5 @@
-import 'package:escola/core/navigator/navigator_app.dart';
-import 'package:escola/core/router/routes.dart';
+import 'package:gerenciamento_escolar/core/navigator/navigator_app.dart';
+import 'package:gerenciamento_escolar/core/router/routes.dart';
 
 abstract class ISplashBloc {
   Future<void> load();

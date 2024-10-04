@@ -1,4 +1,4 @@
-import 'package:escola/model/course_model.dart';
+import 'package:gerenciamento_escolar/model/course_model.dart';
 
 abstract class ICourseRepository {
   Future<List<CourseModel>> getAll();

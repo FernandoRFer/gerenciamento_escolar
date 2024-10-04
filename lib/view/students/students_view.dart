@@ -1,7 +1,7 @@
-import 'package:escola/components/app_search.dart';
-import 'package:escola/components/error_view.dart';
-import 'package:escola/components/list_students.dart';
-import 'package:escola/components/loading.dart';
+import 'package:gerenciamento_escolar/components/app_search.dart';
+import 'package:gerenciamento_escolar/components/error_view.dart';
+import 'package:gerenciamento_escolar/components/list_students.dart';
+import 'package:gerenciamento_escolar/components/loading.dart';
 import 'package:flutter/material.dart';
 import 'students_bloc.dart';
 
@@ -60,7 +60,10 @@ class _StudentViewState extends State<StudentView> {
                   title: const Text("Alunos"),
                 ),
                 floatingActionButton: FloatingActionButton.extended(
-                    label: const Text("Novo cadastro"), onPressed: () {}),
+                    label: const Text("Novo cadastro"),
+                    onPressed: () {
+                      widget.bloc.navegateStudentCreate();
+                    }),
                 body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

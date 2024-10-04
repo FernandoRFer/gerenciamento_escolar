@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:escola/core/navigator/navigator_observer.dart';
+import 'package:gerenciamento_escolar/core/navigator/navigator_observer.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class INavigatorApp {

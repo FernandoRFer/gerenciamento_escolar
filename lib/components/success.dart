@@ -22,54 +22,57 @@ class AppSuccesss extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return TweenAnimationBuilder<Duration>(
-        duration: const Duration(seconds: 5),
-        tween: Tween(begin: const Duration(seconds: 3), end: Duration.zero),
-        onEnd: action,
-        builder: (BuildContext context, Duration value, Widget? child) {
-          return GestureDetector(
-            onTap: action,
-            child: Container(
-              color: Colors.transparent,
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          const SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: AnimatedCheck(),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(top: 14),
-                            child: Text(
-                              title,
-                              textAlign: TextAlign.center,
-                              style: theme.textTheme.headlineMedium,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TweenAnimationBuilder<Duration>(
+          duration: const Duration(seconds: 5),
+          tween: Tween(begin: const Duration(seconds: 3), end: Duration.zero),
+          onEnd: action,
+          builder: (BuildContext context, Duration value, Widget? child) {
+            return GestureDetector(
+              onTap: action,
+              child: Container(
+                color: Colors.transparent,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: AnimatedCheck(),
                             ),
-                          ),
-                          subtitle == ""
-                              ? Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                                  child: Text(
-                                    subtitle,
-                                  ),
-                                )
-                              : Container()
-                        ],
+                            Container(
+                              padding: const EdgeInsets.only(top: 14),
+                              child: Text(
+                                title,
+                                textAlign: TextAlign.center,
+                                style: theme.textTheme.headlineMedium,
+                              ),
+                            ),
+                            subtitle == ""
+                                ? Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                                    child: Text(
+                                      subtitle,
+                                    ),
+                                  )
+                                : Container()
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  // ...?buttons
-                ],
+                    // ...?buttons
+                  ],
+                ),
               ),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }
 
@@ -90,7 +93,7 @@ class Successs {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return TweenAnimationBuilder<Duration>(
-              duration: const Duration(seconds: 5),
+              duration: const Duration(seconds: 3),
               tween:
                   Tween(begin: const Duration(seconds: 3), end: Duration.zero),
               onEnd: button,
