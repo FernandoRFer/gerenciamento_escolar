@@ -30,8 +30,6 @@ abstract class ICourseBloc {
   Future<void> load();
   void navigatorPop();
   Future<void> dispose();
-  Future<void> update(CourseModel courseUpdate);
-  Future<void> delete(CourseModel courseDelete);
   Future<void> studentDetails(CourseModel course);
   Future<void> search(String? search);
   Future<void> claenSearch();
@@ -78,32 +76,6 @@ class CourseBloc implements ICourseBloc {
         .then((_) {
       load();
     });
-  }
-
-  @override
-  Future<void> delete(CourseModel course) async {
-    try {
-      _fetchingDataController.add(LoadingCourseStates());
-      await _courseRepository.delete(course.id);
-      await load();
-    } catch (e) {
-      _fetchingDataController.addError(
-        e,
-      );
-    }
-  }
-
-  @override
-  Future<void> update(CourseModel courseUpdate) async {
-    try {
-      _fetchingDataController.add(LoadingCourseStates());
-      await _courseRepository.update(courseUpdate);
-      await load();
-    } catch (e) {
-      _fetchingDataController.addError(
-        e,
-      );
-    }
   }
 
   @override

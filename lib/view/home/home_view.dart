@@ -1,5 +1,4 @@
 import 'package:gerenciamento_escolar/components/error_view.dart';
-import 'package:gerenciamento_escolar/components/loading.dart';
 import 'package:gerenciamento_escolar/view/home/components/body_home.dart';
 import 'package:flutter/material.dart';
 import 'home_bloc.dart';
@@ -16,8 +15,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final _userController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -28,7 +25,6 @@ class _HomeViewState extends State<HomeView> {
   void dispose() {
     super.dispose();
     widget.bloc.dispose();
-    _userController.dispose();
   }
 
   @override
@@ -37,36 +33,28 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         title: const Text("Home"),
       ),
-      body: StreamBuilder<HomeModelBloc>(
+      body: StreamBuilder<HomeStatesBloc>(
           stream: widget.bloc.onFetchingData,
-          initialData: HomeModelBloc(),
+          initialData: HomeStatesBloc(),
           builder: (context, snapshot) {
-            if (!snapshot.hasError) {
-              if (snapshot.hasData) {
-                if (false) {
-                  return const Center(
-                    child: AnimatedLoading(),
-                  );
-                }
-              }
-            } else {
-              return ErrorView(
-                  title: "Error",
-                  subtitle: snapshot.error.toString(),
-                  buttons: [
-                    OutlinedButton(
-                      child: const Center(child: Text("Back")),
-                      onPressed: () {
-                        widget.bloc.load();
-                        widget.bloc.navigatorPop();
-                      },
-                    ),
-                  ]);
+            if (snapshot.hasError) {
+              return Scaffold(
+                body: ErrorView(
+                    title: "Error",
+                    subtitle: snapshot.error.toString(),
+                    buttons: [
+                      OutlinedButton(
+                        child: const Center(child: Text("Back")),
+                        onPressed: () {
+                          widget.bloc.load();
+                          widget.bloc.navigatorPop();
+                        },
+                      ),
+                    ]),
+              );
             }
 
-            return BodyHome(
-              bloc: widget.bloc,
-            );
+            return BodyHome(bloc: widget.bloc);
           }),
     );
   }

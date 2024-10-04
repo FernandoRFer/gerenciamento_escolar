@@ -17,9 +17,6 @@ class StudentView extends StatefulWidget {
 }
 
 class _StudentViewState extends State<StudentView> {
-  final List<GlobalKey> keys = [];
-  bool isSelected = true;
-
   @override
   void initState() {
     super.initState();
@@ -85,18 +82,20 @@ class _StudentViewState extends State<StudentView> {
               );
             }
           } else {
-            return ErrorView(
-                title: "Error",
-                subtitle: snapshot.error.toString(),
-                buttons: [
-                  OutlinedButton(
-                    child: const Center(child: Text("Back")),
-                    onPressed: () {
-                      widget.bloc.load();
-                      widget.bloc.navigatorPop();
-                    },
-                  ),
-                ]);
+            return Scaffold(
+              body: ErrorView(
+                  title: "Error",
+                  subtitle: snapshot.error.toString(),
+                  buttons: [
+                    OutlinedButton(
+                      child: const Center(child: Text("Back")),
+                      onPressed: () {
+                        widget.bloc.load();
+                        widget.bloc.navigatorPop();
+                      },
+                    ),
+                  ]),
+            );
           }
 
           return const Center(child: Text("Sem dados para exibir"));

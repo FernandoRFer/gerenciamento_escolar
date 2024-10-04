@@ -1,12 +1,12 @@
-class RequestSettings {
-  static String baseURL = "localhost:8081";
+abstract class RequestSettings {
+  static String baseURL = "http://localhost:8081";
   static Map<String, String> headerTypeJson = {
     'Content-Type': 'application/json'
   };
-  static bool isMock = false;
+  static bool isMocked = false;
 
   static getEnvironmentvariable() {
-    const environmentisMock = bool.fromEnvironment("IS_MOCK");
-    if (baseURL.isNotEmpty) isMock = environmentisMock == true;
+    bool environmentisMock = const bool.fromEnvironment("MOCKED");
+    isMocked = environmentisMock;
   }
 }

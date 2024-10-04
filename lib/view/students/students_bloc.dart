@@ -14,7 +14,7 @@ abstract class StudentStates {}
 class LoadingStudentStates extends StudentStates {
   String title;
   LoadingStudentStates({
-    this.title = "Carregando cursos",
+    this.title = "Carregando alunos",
   });
 }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:gerenciamento_escolar/model/student_model.dart';
 import 'package:gerenciamento_escolar/repository/rest_client/rest_client.dart';
 import 'package:gerenciamento_escolar/repository/student_repository/student_repository.dart';
@@ -11,7 +13,7 @@ main() {
     StudentModel reponse = student;
     test("deve traser lista de cursos", () async {
       var result = await repository.getAll();
-      print("Action [GetAll] --- Total register ${result.length}");
+      log("Action [GetAll] --- Total register ${result.length}");
       expect(result.runtimeType, equals(List<StudentModel>));
     });
     test("deve registrar e confimar registro", () async {
@@ -19,7 +21,7 @@ main() {
 
       //Confimação do registro
       reponse = await repository.getById(reponse.id);
-      print("Action [Create] --- ${reponse.id} --- ${reponse.name}");
+      log("Action [Create] --- ${reponse.id} --- ${reponse.name}");
       expect(reponse.name, student.name);
     });
 
@@ -29,7 +31,7 @@ main() {
         id: idComparison,
         name: "natalia Daston",
       ));
-      print("Action [Update] --- ${reponse.id} --- ${reponse.name}");
+      log("Action [Update] --- ${reponse.id} --- ${reponse.name}");
       //Confimação do registro
       final reponseComparison = await repository.getById(reponse.id);
 
@@ -46,7 +48,7 @@ main() {
         existsCourse = true;
       }
 
-      print("Action [Delete]");
+      log("Action [Delete]");
       expect(existsCourse, true);
     });
   });

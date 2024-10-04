@@ -16,6 +16,7 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView>
     with WidgetsBindingObserver, SingleTickerProviderStateMixin {
   ValueNotifier<bool> isAuth = ValueNotifier(false);
+  // ignore: unused_field
   late AnimationController _animation;
 
   @override

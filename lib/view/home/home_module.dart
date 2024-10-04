@@ -7,11 +7,7 @@ class HomeModule {
   static GetIt getIt = GetIt.instance;
   static configure() {
     getIt
-      ..registerFactory<IHomeBloc>(() => HomeBloc(
-            getIt(),
-          ))
-      ..registerFactory(() => HomeView(
-            getIt(),
-          ));
+      ..registerFactory<IHomeBloc>(() => HomeBloc(getIt()))
+      ..registerFactory(() => HomeView(getIt()));
   }
 }

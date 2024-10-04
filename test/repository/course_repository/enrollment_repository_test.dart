@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:gerenciamento_escolar/model/course_model.dart';
 import 'package:gerenciamento_escolar/model/enrollment_model.dart';
 import 'package:gerenciamento_escolar/model/student_model.dart';
@@ -50,7 +52,7 @@ main() {
     test("deve traser lista de cursos", () async {
       var results = await repository.getDetailsCourse(course1.id);
       for (var result in results) {
-        print("Action [getDetailsCourse] --- ${result.id} --- ${result.name}");
+        log("Action [getDetailsCourse] --- ${result.id} --- ${result.name}");
       }
       expect(results.runtimeType, equals(List<StudentModel>));
     });
@@ -58,17 +60,16 @@ main() {
     test("deve traser lista de curso", () async {
       var results = await repository.getDetailsStudent(student1.id);
       for (var result in results) {
-        print(
-            "Action [getDetailsCourse] --- ${result.id} --- ${result.description}");
+        log("Action [getDetailsCourse] --- ${result.id} --- ${result.description}");
       }
       expect(results.runtimeType, equals(List<CourseModel>));
     });
 
     test("deve deve deletar", () async {
-      print("${student1.id}, ${course1.id}");
+      log("${student1.id}, ${course1.id}");
       await repository.deleteEnrollment(student1.id, course1.id);
 
-      print("Action [Delete] ");
+      log("Action [Delete] ");
     });
   });
 }

@@ -2,7 +2,6 @@ import 'package:gerenciamento_escolar/components/error_view.dart';
 import 'package:gerenciamento_escolar/components/loading.dart';
 import 'package:gerenciamento_escolar/components/success.dart';
 import 'package:gerenciamento_escolar/core/utils/validator.dart';
-import 'package:gerenciamento_escolar/model/course_model.dart';
 import 'package:gerenciamento_escolar/model/student_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -100,7 +99,7 @@ class _StudentFormsViewState extends State<StudentFormsView> with Validator {
                         label: const Text("Concluir"),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            widget.bloc.action(actionForms);
+                            widget.bloc.selectAction(actionForms);
                           }
                         }),
                     body: SingleChildScrollView(

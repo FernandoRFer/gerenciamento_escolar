@@ -4,10 +4,10 @@ import 'package:gerenciamento_escolar/core/navigator/navigator_app.dart';
 import 'package:gerenciamento_escolar/core/router/routes.dart';
 import 'package:rxdart/rxdart.dart';
 
-class HomeModelBloc {}
+class HomeStatesBloc {}
 
 abstract class IHomeBloc {
-  Stream<HomeModelBloc> get onFetchingData;
+  Stream<HomeStatesBloc> get onFetchingData;
   Future<void> load();
   void navigatorPop();
   Future<void> dispose();
@@ -23,7 +23,10 @@ class HomeBloc implements IHomeBloc {
     this._navigatorApp,
   );
 
-  final _fetchingDataController = BehaviorSubject<HomeModelBloc>();
+  final _fetchingDataController = BehaviorSubject<HomeStatesBloc>();
+
+  @override
+  Stream<HomeStatesBloc> get onFetchingData => _fetchingDataController.stream;
 
   @override
   Future<void> dispose() async {
@@ -32,7 +35,9 @@ class HomeBloc implements IHomeBloc {
 
   @override
   Future<void> load() async {
-    try {} catch (e) {
+    try {
+      _fetchingDataController.add(HomeStatesBloc());
+    } catch (e) {
       _fetchingDataController.addError(
         e,
       );
@@ -53,9 +58,6 @@ class HomeBloc implements IHomeBloc {
   Future<void> navigatorStudents() async {
     await _navigatorApp.pushNamed(AppRoutes.student);
   }
-
-  @override
-  Stream<HomeModelBloc> get onFetchingData => _fetchingDataController.stream;
 
   @override
   Future<void> navigatorEnrollment() async {

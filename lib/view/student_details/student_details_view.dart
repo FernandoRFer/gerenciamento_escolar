@@ -25,9 +25,6 @@ class StudentDetailsView extends StatefulWidget {
 }
 
 class _StudentDetailsViewState extends State<StudentDetailsView> {
-  final List<GlobalKey> keys = [];
-  int errorteste = 0;
-
   @override
   void initState() {
     super.initState();

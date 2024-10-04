@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:gerenciamento_escolar/model/course_model.dart';
 import 'package:gerenciamento_escolar/repository/couse_repository/course_repository.dart';
 import 'package:gerenciamento_escolar/repository/rest_client/rest_client.dart';
@@ -12,7 +14,7 @@ main() {
     late final int idComparison;
     test("deve traser lista de cursos", () async {
       var result = await repository.getAll();
-      print("Action [GetAll] --- Total register ${result.length}");
+      log("Action [GetAll] --- Total register ${result.length}");
       expect(result.runtimeType, equals(List<CourseModel>));
     });
     test("deve registrar e confimar registro", () async {
@@ -24,8 +26,7 @@ main() {
       //Confimação do registro
       reponse = await repository.getById(reponse.id);
 
-      print(
-          "Action [Create] --- ${reponse.id} --- ${reponse.description} --- ${reponse.syllabus}");
+      log("Action [Create] --- ${reponse.id} --- ${reponse.description} --- ${reponse.syllabus}");
       expect(reponse.description, course.description);
       expect(reponse.syllabus, course.syllabus);
     });
@@ -38,8 +39,7 @@ main() {
 
       //Confimação do registro
       final reponseComparison = await repository.getById(reponse.id);
-      print(
-          "Action [Update] --- ${reponse.id} --- ${reponse.description} --- ${reponse.syllabus}");
+      log("Action [Update] --- ${reponse.id} --- ${reponse.description} --- ${reponse.syllabus}");
       expect(reponseComparison.id, idComparison);
       expect(reponse.description, reponseComparison.description);
       expect(reponse.syllabus, reponseComparison.syllabus);
@@ -53,7 +53,7 @@ main() {
       } catch (e) {
         existsCourse = true;
       }
-      print("Action [Delete]");
+      log("Action [Delete]");
       expect(existsCourse, true);
     });
   });

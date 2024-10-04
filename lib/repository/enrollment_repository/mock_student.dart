@@ -6,12 +6,6 @@ import 'package:gerenciamento_escolar/core/utils/mocks/mock_data.dart';
 
 class MockEnrollment implements IEnrollmentRepository {
   @override
-  Future<List<CourseModel>> getId(int idStudent) {
-    // TODO: implement getId
-    throw UnimplementedError();
-  }
-
-  @override
   Future<List<CourseModel>> getDetailsStudent(int idStudent) async {
     final courses = <CourseModel>[];
 

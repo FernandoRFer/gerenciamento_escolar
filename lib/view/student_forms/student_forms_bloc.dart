@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'package:gerenciamento_escolar/model/student_model.dart';
-import 'package:gerenciamento_escolar/repository/couse_repository/i_course_repository.dart';
 import 'package:gerenciamento_escolar/repository/student_repository/i_student_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:gerenciamento_escolar/core/navigator/navigator_app.dart';
-import 'package:gerenciamento_escolar/model/course_model.dart';
 
 enum ActionStudentForms { update, create }
 
@@ -35,7 +33,7 @@ abstract class IStudentFormBloc {
 
   Future<void> load(StudentModel? student);
   Future<void> dispose();
-  Future<void> action(ActionStudentForms actionForms);
+  Future<void> selectAction(ActionStudentForms actionForms);
   void navigatorPop();
   void navigatorPopArgument();
 
@@ -98,7 +96,7 @@ class StudentFormsBloc implements IStudentFormBloc {
   }
 
   @override
-  Future<void> action(ActionStudentForms actionStudentForms) async {
+  Future<void> selectAction(ActionStudentForms actionStudentForms) async {
     if (actionStudentForms == ActionStudentForms.create) {
       _create();
     } else {
@@ -125,8 +123,7 @@ class StudentFormsBloc implements IStudentFormBloc {
       await _studentRepository
           .update(StudentModel(id: _student.id, name: _nameController.value));
 
-      _fetchingDataController
-          .add(SuccesStates("Cadastro realizado com sucesso com sucesso!"));
+      _fetchingDataController.add(SuccesStates("Atualizado com sucesso!"));
     } catch (e) {
       _fetchingDataController.addError(e);
     }

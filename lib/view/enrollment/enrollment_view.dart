@@ -1,5 +1,4 @@
 import 'package:gerenciamento_escolar/components/app_search.dart';
-import 'package:gerenciamento_escolar/components/drop_button.dart';
 import 'package:gerenciamento_escolar/components/error_view.dart';
 import 'package:gerenciamento_escolar/components/list_students.dart';
 import 'package:gerenciamento_escolar/components/loading.dart';

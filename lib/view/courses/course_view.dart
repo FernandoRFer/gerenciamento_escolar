@@ -17,8 +17,6 @@ class CourseView extends StatefulWidget {
 }
 
 class _CourseViewState extends State<CourseView> {
-  final List<GlobalKey> keys = [];
-
   @override
   void initState() {
     super.initState();

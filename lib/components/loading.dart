@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'dots_loading.dart';
 
 class AnimatedLoading extends StatelessWidget {
-  final String? title;
+  final String title;
   const AnimatedLoading({
     super.key,
-    this.title,
+    this.title = "Carregando",
   });
 
   @override
@@ -32,7 +32,7 @@ class AnimatedLoading extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      title!,
+                      title,
                       style: Theme.of(context).textTheme.headlineSmall,
                       textAlign: TextAlign.justify,
                     ),
