@@ -96,7 +96,7 @@ class _CourseFormsViewState extends State<CourseFormsView> with Validator {
                     floatingActionButtonLocation:
                         FloatingActionButtonLocation.centerFloat,
                     floatingActionButton: FloatingActionButton.extended(
-                        label: const Text("Concluir!"),
+                        label: const Text("Concluir"),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             widget.bloc.action(actionForms);

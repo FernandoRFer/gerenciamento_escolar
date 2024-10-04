@@ -31,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home"),
+        title: const Text("Gerenciamento Escolar"),
       ),
       body: StreamBuilder<HomeStatesBloc>(
           stream: widget.bloc.onFetchingData,
@@ -44,7 +44,7 @@ class _HomeViewState extends State<HomeView> {
                     subtitle: snapshot.error.toString(),
                     buttons: [
                       OutlinedButton(
-                        child: const Center(child: Text("Back")),
+                        child: const Center(child: Text("Voltar")),
                         onPressed: () {
                           widget.bloc.load();
                           widget.bloc.navigatorPop();

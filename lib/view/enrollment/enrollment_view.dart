@@ -222,7 +222,6 @@ class _EnrollmentViewState extends State<EnrollmentView> with Validator {
                       child: const Center(child: Text("Back")),
                       onPressed: () {
                         widget.bloc.navigatorPop();
-                        widget.bloc.navigatorPop();
                       },
                     ),
                   ]),

@@ -37,8 +37,15 @@ class _SplashViewState extends State<SplashView>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text("Bem vindo,\ncontrole escolar",
-                  style: TextStyle(fontFamily: "Chunk", fontSize: 30))
+          const Icon(
+            Icons.school_outlined,
+            size: 150,
+          ).animate(onPlay: (controller) => controller.repeat()).shimmer(
+              duration: 1200.ms,
+              color: Theme.of(context).primaryColorLight,
+              angle: -0.2),
+          const Text("Bem vindo,\nGerenciamento Escolar",
+                  style: TextStyle(fontSize: 30))
               .animate(onPlay: (controller) => controller.repeat())
               .shimmer(
                   duration: 1200.ms,
